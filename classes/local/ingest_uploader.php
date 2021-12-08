@@ -154,7 +154,7 @@ class ingest_uploader
                         $file = new PolyfillCURLStringFile($aclxml, 'xacml-episode.xml', 'text/xml',);
                     }
 
-                    $mediapackage = $apibridge->ingest_add_attachment($job->mediapackage, 'ecurity/xacml+episode', $file);
+                    $mediapackage = $apibridge->ingest_add_attachment($job->mediapackage, 'security/xacml+episode', $file);
                     mtrace('... added acl');
                     // Move on to next status.
                     self::update_status_with_mediapackage($job, self::STATUS_INGEST_INGESTING, true, false, false, $mediapackage);
