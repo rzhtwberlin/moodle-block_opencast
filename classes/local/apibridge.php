@@ -112,6 +112,14 @@ class apibridge
         return true;
     }
 
+    /**
+     * Sets up an api object with an ingest node as endpoint.
+     *
+     * @return api
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws opencast_connection_exception
+     */
     private function get_ingest_api() {
         $api = api::get_instance($this->ocinstanceid);
         $services = $api->oc_get('/services/services.json?serviceType=org.opencastproject.ingest');
@@ -141,9 +149,17 @@ class apibridge
         return $api;
     }
 
+    /**
+     * Create a new media package via an ingest node.
+     *
+     * @return string Newly created mediapackage
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws opencast_connection_exception
+     */
     public function ingest_create_media_package() {
         $api = $this->get_ingest_api();
-        $mediaPackage = $api->oc_get('/createMediaPackage');
+        $mediapackage = $api->oc_get('/createMediaPackage');
 
         if ($api->get_http_code() === 0) {
             throw new opencast_connection_exception('connection_failure', 'block_opencast');
@@ -151,12 +167,22 @@ class apibridge
             throw new opencast_connection_exception('unexpected_api_response', 'block_opencast');
         }
 
-        return $mediaPackage;
+        return $mediapackage;
     }
 
+    /**
+     * Add a catalog via an ingest node.
+     * @param string $mediapackage Mediapackage to which the catalog is added
+     * @param string $flavor Flavor of catalog
+     * @param object $file Catalog as file
+     * @return string
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws opencast_connection_exception
+     */
     public function ingest_add_catalog($mediapackage, $flavor, $file) {
         $api = $this->get_ingest_api();
-        $mediaPackage = $api->oc_post('/addCatalog', array(
+        $newmediapackage = $api->oc_post('/addCatalog', array(
             'mediaPackage' => $mediapackage,
             'flavor' => $flavor,
             'Body' => $file));
@@ -167,12 +193,22 @@ class apibridge
             throw new opencast_connection_exception('unexpected_api_response', 'block_opencast');
         }
 
-        return $mediaPackage;
+        return $newmediapackage;
     }
 
+    /**
+     * Add a track via an ingest node.
+     * @param string $mediapackage Mediapackage to which the track is added
+     * @param string $flavor Flavor of track
+     * @param object $file Track
+     * @return string
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws opencast_connection_exception
+     */
     public function ingest_add_track($mediapackage, $flavor, $file) {
         $api = $this->get_ingest_api();
-        $mediaPackage = $api->oc_post('/addTrack', array(
+        $newmediapackage = $api->oc_post('/addTrack', array(
             'mediaPackage' => $mediapackage,
             'flavor' => $flavor,
             'Body' => $file));
@@ -183,12 +219,22 @@ class apibridge
             throw new opencast_connection_exception('unexpected_api_response', 'block_opencast');
         }
 
-        return $mediaPackage;
+        return $newmediapackage;
     }
 
+    /**
+     * Adds an attachment via an ingest node.
+     * @param string $mediapackage Mediapackage to which the attachment is added
+     * @param string $flavor Flavor of attachment
+     * @param object $file Attachment
+     * @return string
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws opencast_connection_exception
+     */
     public function ingest_add_attachment($mediapackage, $flavor, $file) {
         $api = $this->get_ingest_api();
-        $mediaPackage = $api->oc_post('/addAttachment', array(
+        $newmediapackage = $api->oc_post('/addAttachment', array(
             'mediaPackage' => $mediapackage,
             'flavor' => $flavor,
             'Body' => $file));
@@ -199,9 +245,17 @@ class apibridge
             throw new opencast_connection_exception('unexpected_api_response', 'block_opencast');
         }
 
-        return $mediaPackage;
+        return $newmediapackage;
     }
 
+    /**
+     * Ingests a mediapackage.
+     * @param string $mediapackage Mediapackage
+     * @return string Workflow instance that was started
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws opencast_connection_exception
+     */
     public function ingest($mediapackage) {
         $api = $this->get_ingest_api();
         $workflow = $api->oc_post('/ingest/' . get_config("block_opencast", "uploadworkflow_" . $this->ocinstanceid), array(
@@ -241,7 +295,8 @@ class apibridge
         $allvideos = [];
 
         foreach ($series as $s) {
-            $query = 'sign=1&withacl=1&withmetadata=1&withpublications=1&sort=start_date:DESC&filter=' . urlencode("series:" . $s->series);
+            $query = 'sign=1&withacl=1&withmetadata=1&withpublications=1&sort=start_date:DESC&filter=' .
+                urlencode("series:" . $s->series);
 
             if (get_config('block_opencast', 'limitvideos_' . $this->ocinstanceid) > 0) {
                 // Try to fetch one more to decide whether display "more link" is necessary.
