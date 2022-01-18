@@ -24,7 +24,10 @@
 
 namespace block_opencast\local;
 
+use context_module;
 use mod_opencast\local\opencasttype;
+
+require_once($CFG->dirroot . '/course/lib.php');
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -417,5 +420,44 @@ class activitymodulemanager
 
         // Finally, return the course section array.
         return $sectionmenu;
+    }
+
+    public static function hide_activities_of_video($ocinstanceid, $videoid) {
+        global $DB;
+
+        // Hide video activities.
+        $instances = $DB->get_records('opencast',
+            array('opencastid' => $videoid, 'type' => opencasttype::EPISODE, 'ocinstanceid' => $ocinstanceid));
+
+        foreach ($instances as $instance) {
+            // Check if the Opencast Activity series module with the given id really exists.
+            $cm = get_coursemodule_from_instance('opencast', $instance->id, $instance->course);
+
+            if ($cm) {
+                if (set_coursemodule_visible($cm->id, 0)) {
+                    \core\event\course_module_updated::create_from_cm($cm, context_module::instance($cm->id))->trigger();
+                }
+            }
+        }
+    }
+
+
+    public static function unhide_activities_of_video($ocinstanceid, $videoid) {
+        global $DB;
+
+        // Hide video activities.
+        $instances = $DB->get_records('opencast',
+            array('opencastid' => $videoid, 'type' => opencasttype::EPISODE, 'ocinstanceid' => $ocinstanceid));
+
+        foreach ($instances as $instance) {
+            // Check if the Opencast Activity series module with the given id really exists.
+            $cm = get_coursemodule_from_instance('opencast', $instance->id, $instance->course);
+
+            if ($cm) {
+                if (set_coursemodule_visible($cm->id, 1)) {
+                    \core\event\course_module_updated::create_from_cm($cm, context_module::instance($cm->id))->trigger();
+                }
+            }
+        }
     }
 }
