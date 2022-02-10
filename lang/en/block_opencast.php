@@ -264,6 +264,14 @@ $string['embeddedasactivity'] = 'Embedded as activity';
 $string['embeddedasactivitywolink'] = 'Embedded as activity without linked series';
 $string['empty_catalogname'] = 'This field must not be empty';
 $string['emptyvideouploaderror'] = 'You must either upload a presenter video or a presentation video file.';
+$string['engageplayerintegration'] = 'Engage player integration';
+$string['engageredirect'] = 'Redirect to engage player';
+$string['engageurl'] = 'URL of the Opencast Engage server';
+$string['engageurl_desc'] = 'If empty, the video titles in the overview are not linked to the engage player.';
+$string['engagelticonsumerkey'] = 'LTI Consumer key to access video';
+$string['engagelticonsumerkey_desc'] = 'LTI Consumer key to access videos in the engage player.';
+$string['engagelticonsumersecret'] = 'LTI Consumer secret to access video';
+$string['engagelticonsumersecret_desc'] = 'LTI Consumer secret to access videos in the engage player.';
 $string['expirydate'] = 'Expiry Date';
 $string['exists_catalogname'] = 'The field is already existed';
 $string['enablechunkupload'] = 'Enable Chunkupload';
@@ -698,20 +706,6 @@ $string['editorlticonsumerkey_desc'] = 'LTI Consumer key for the opencast editor
 $string['editorlticonsumersecret'] = 'Opencast Editor Consumer secret';
 $string['editorlticonsumersecret_desc'] = 'LTI Consumer secret for the opencast editor integration.';
 
-// Opencast Video Player strings.
-$string['staticvideofilelink_short'] = 'Link to video';
-$string['opencaststaticvideofilelink'] = 'Access Video static file';
-$string['enableopencaststaticvideofilelink'] = 'Show the link to access the video static file in action menu';
-$string['enableopencaststaticvideofilelink_desc'] = 'This option renders a button to access the video static file in opencast from the block content and the block overview.
- In case the "Secure Static Files" option in opencast server is on, it is required to make LTI Authentication before accessing the video. That can be done via the following LTI settings.';
-$string['staticvideofilelticonsumerkey'] = 'LTI Consumer key to access video';
-$string['staticvideofilelticonsumerkey_desc'] = 'LTI Consumer key to access video static file via search node in case "Secure Static Files" is enabled';
-$string['staticvideofilelticonsumersecret'] = 'LTI Consumer secret to access video';
-$string['staticvideofilelticonsumersecret_desc'] = 'LTI Consumer secret to access video static file via search node in case "Secure Static Files" is enabled.';
-$string['staticvideofileinvalidconfig'] = 'Unable to access the video.';
-$string['staticvideofilenosearchservice'] = 'The presentation service is not available.';
-$string['staticvideofilefailedtogetvideodata'] = 'Unable to get video static file data.';
-$string['staticvideofilenovideotrack'] = 'Unable to find video data.';
 // Strings fot new opencast studio settings.
 $string['opencaststudionewtab'] = 'Redirect to Studio in a new tab';
 $string['opencaststudionewtab_desc'] = 'When enabled, studio opens in a new tab.';

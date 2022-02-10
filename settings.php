@@ -509,27 +509,27 @@ if ($hassiteconfig) { // Needs this condition or there is error on login page.
 
             // Opencast Video Player in additional feature settings.
             $additionalsettings->add(
-                new admin_setting_heading('block_opencast/opencast_access_video_file_' . $instance->id,
-                    get_string('opencaststaticvideofilelink', 'block_opencast'),
+                new admin_setting_heading('block_opencast/opencast_access_video_' . $instance->id,
+                    get_string('engageplayerintegration', 'block_opencast'),
                     ''));
 
-            // The Generall player Permission.
+            // The link to the engage player.
             $additionalsettings->add(
-                new admin_setting_configcheckbox('block_opencast/enable_opencast_access_video_file_link_' . $instance->id,
-                    get_string('enableopencaststaticvideofilelink', 'block_opencast'),
-                    get_string('enableopencaststaticvideofilelink_desc', 'block_opencast'), 0));
+                new admin_setting_configtext('block_opencast/engageurl_' . $instance->id,
+                    get_string('engageurl', 'block_opencast'),
+                    get_string('engageurl_desc', 'block_opencast'), ""));
 
             // LTI Consumer Key for the video player.
             $additionalsettings->add(
-                new admin_setting_configtext('block_opencast/staticvideofilelticonsumerkey_' . $instance->id,
-                    get_string('staticvideofilelticonsumerkey', 'block_opencast'),
-                    get_string('staticvideofilelticonsumerkey_desc', 'block_opencast'), ""));
+                new admin_setting_configtext('block_opencast/engagelticonsumerkey_' . $instance->id,
+                    get_string('engagelticonsumerkey', 'block_opencast'),
+                    get_string('engagelticonsumerkey_desc', 'block_opencast'), ""));
 
             // LTI Consumer Secret for the video player.
             $additionalsettings->add(
-                new admin_setting_configpasswordunmask('block_opencast/staticvideofilelticonsumersecret_' . $instance->id,
-                    get_string('staticvideofilelticonsumersecret', 'block_opencast'),
-                    get_string('staticvideofilelticonsumersecret_desc', 'block_opencast'), ""));
+                new admin_setting_configpasswordunmask('block_opencast/engagelticonsumersecret_' . $instance->id,
+                    get_string('engagelticonsumersecret', 'block_opencast'),
+                    get_string('engagelticonsumersecret_desc', 'block_opencast'), ""));
 
             // Notifications in additional features settings.
             $additionalsettings->add(

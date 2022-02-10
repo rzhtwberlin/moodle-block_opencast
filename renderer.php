@@ -762,24 +762,6 @@ class block_opencast_renderer extends plugin_renderer_base {
     }
 
     /**
-     * Render the link to access video static file.
-     *
-     * @param int $ocinstanceid
-     * @param int $courseid
-     * @param string $videoidentifier
-     */
-    public function render_video_link_icon($ocinstanceid, $courseid, $videoidentifier) {
-
-        $url = new \moodle_url('/blocks/opencast/accessvideo.php',
-            array('identifier' => $videoidentifier, 'courseid' => $courseid, 'ocinstanceid' => $ocinstanceid));
-        $text = get_string('staticvideofilelink_short', 'block_opencast');
-
-        $icon = $this->output->pix_icon('e/anchor', $text, 'moodle');
-
-        return \html_writer::link($url, $icon, ['target' => '_blank']);
-    }
-
-    /**
      * Render the link to delete a group assignment.
      *
      * @param int $ocinstanceid Opencast instance id.
@@ -1043,7 +1025,7 @@ class block_opencast_renderer extends plugin_renderer_base {
      * Display the lti form.
      *
      * @param string $endpoint
-     * @param object $params The prepared variables.
+     * @param array $params The prepared variables.
      * @return string
      */
     public function render_lti_form($endpoint, $params) {
