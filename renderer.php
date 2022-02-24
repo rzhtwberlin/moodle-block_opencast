@@ -1077,6 +1077,8 @@ class block_opencast_renderer extends plugin_renderer_base {
      * @throws moodle_exception
      */
     public function render_download_event_icon($ocinstanceid, $courseid, $video) {
+        global $CFG;
+
         // Get the action menu options.
         $actionmenu = new action_menu();
         if ($CFG->branch >= 400) {
