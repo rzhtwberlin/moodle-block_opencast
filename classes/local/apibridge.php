@@ -1612,7 +1612,6 @@ class apibridge {
      * @throws \moodle_exception
      */
     private function update_metadata($eventid) {
-        return true;
         $video = $this->get_opencast_video($eventid);
 
         if ($video->error === 0) {
@@ -1623,6 +1622,7 @@ class apibridge {
                 if (!$workflow) {
                     return true;
                 }
+                throw new \moodle_exception('workflow_start', 'block_opencast');
                 return $this->start_workflow($eventid, $workflow);
             }
             return true;
