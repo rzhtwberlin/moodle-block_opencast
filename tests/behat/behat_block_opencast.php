@@ -72,7 +72,8 @@ class behat_block_opencast extends behat_base {
         $mapping->set('ocinstanceid', 1);
         $mapping->create();
 
-        $newdata = ['api_events.json', 'api_events_acl.json', 'api_events_detailpage.json', 'api_series.json',
+        $newdata = ['api_events.json', 'api_events_secondvideo.json', 'api_events_acl.json',
+            'api_events_detailpage.json', 'api_series.json',
             'api_series_metadata.json', 'api_series_two.json', 'api_events_with_publication.json',
             'api_series_filter.json', 'api_events_metadata.json', 'api_events_single_event.json',
             'api_events_nolimit.json', 'api_events_only_basic_infos.json'];
