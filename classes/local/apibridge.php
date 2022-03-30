@@ -1626,6 +1626,7 @@ class apibridge {
             }
             return true;
         }
+        throw new \moodle_exception('error_updating_metadata', 'block_opencast');
         return false;
     }
 
