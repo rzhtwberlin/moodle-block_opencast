@@ -26,6 +26,6 @@
       "api",
       "annotation"
     ],
-    "status": "EVENTS.EVENTS.STATUS.PROCESSED"
+    "status": "EVENTS.EVENTS.STATUS.SCHEDULED"
   }
 }
