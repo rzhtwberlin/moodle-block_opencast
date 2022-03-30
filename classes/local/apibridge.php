@@ -1612,6 +1612,7 @@ class apibridge {
      * @throws \moodle_exception
      */
     private function update_metadata($eventid) {
+        return true;
         $video = $this->get_opencast_video($eventid);
 
         if ($video->error === 0) {
